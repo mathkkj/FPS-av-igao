@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://btvpkknnj1x6v"]
+
+[ext_resource type="Texture2D" uid="uid://bf62oktdnx84t" path="res://images (20) - Copia.jpg" id="1_7alge"]
+[ext_resource type="Texture2D" uid="uid://dcec5qbppfm8x" path="res://images (19).jpg" id="2_rxhl6"]
+[ext_resource type="Script" uid="uid://ycugerxpnst2" path="res://bullethole_sprite.gd" id="3_tkkn2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tkkn2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7alge")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rxhl6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_7alge")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" unique_id=1418648171]
+transform = Transform3D(0.048734337, 0, 0, 0, 0.048734337, 0, 0, 0, 1, 0, 0, 0)
+top_level = true
+modulate = Color(0.17451319, 0.18259466, 0.17648783, 1)
+billboard = 1
+no_depth_test = true
+sprite_frames = SubResource("SpriteFrames_tkkn2")
+autoplay = "default"
+frame = 2
+frame_progress = 1.0
+speed_scale = 3.0
+script = ExtResource("3_tkkn2")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

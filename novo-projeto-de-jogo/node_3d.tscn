@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://crnotpnlbg0bp"]
+
+[ext_resource type="PackedScene" uid="uid://crcv2csr7aco1" path="res://character_body_3d.tscn" id="1_a202f"]
+[ext_resource type="Script" uid="uid://ctn8e30adxj2l" path="res://alvo.gd" id="2_a0tk4"]
+[ext_resource type="Texture2D" uid="uid://c1bogyy6yd16r" path="res://images (22).jpg" id="3_r3fl7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jka67"]
+albedo_texture = ExtResource("3_r3fl7")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_i5arm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wc5p8"]
+
+[node name="Node3D" type="Node3D" unique_id=223864082]
+
+[node name="CharacterBody3D" parent="." unique_id=1856283303 instance=ExtResource("1_a202f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2662483, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CharacterBody3D" unique_id=479172149]
+transform = Transform3D(1, 0, 0, 0, 0.68654203, 0.7270901, 0, -0.7270901, 0.68654203, 0, 2.150621, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=107654412]
+transform = Transform3D(9.674469, 0, 0, 0, 1, 0, 0, 0, 3.203933, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1575663506]
+shape = SubResource("BoxShape3D_noarx")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D" unique_id=385140181]
+
+[node name="alvo" type="StaticBody3D" parent="." unique_id=1505418753]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.24477315, -1.3551503)
+script = ExtResource("2_a0tk4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="alvo" unique_id=1943317495]
+material_override = SubResource("StandardMaterial3D_jka67")
+mesh = SubResource("CapsuleMesh_i5arm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="alvo" unique_id=942135936]
+shape = SubResource("CapsuleShape3D_wc5p8")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=1212958825]
+transform = Transform3D(9.697022, 0, 0, 0, 1.7270472, 0, 0, 0, 0.7487946, 0, 0.8641629, -1.9618635)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=889984388]
+shape = SubResource("BoxShape3D_noarx")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D2" unique_id=1481922004]
