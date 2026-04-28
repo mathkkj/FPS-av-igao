@@ -59,3 +59,6 @@ func atirar_projetil(from):
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		atirar_projetil(event.position)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+		for i in range(1, 10):
+			atirar_projetil(event.position)
