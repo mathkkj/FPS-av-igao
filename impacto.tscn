@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b182ytgk4hits"]
 
-[ext_resource type="Texture2D" uid="uid://dtsybqn5wei1h" path="res://images (19) - Copia.jpg" id="1_bm84r"]
+[ext_resource type="Texture2D" uid="uid://uxnrym2bsej3" path="res://bullet_hole_pixel.png" id="1_bm84r"]
 
 [node name="impacto" type="Sprite3D" unique_id=748211791]
-transform = Transform3D(0.02228451, 0, 0, 0, 0.02228451, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.09014369, 0, 0, 0, 0.09014369, 0, 0, 0, 1, 0, 0, 0)
 top_level = true
 texture = ExtResource("1_bm84r")

@@ -22,10 +22,11 @@ animations = [{
 }]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" unique_id=1418648171]
-transform = Transform3D(0.048734337, 0, 0, 0, 0.048734337, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.048734337, 0, 0, 0, 0.027101444, 0, 0, 0, 0.55610573, 0, 0, 0)
 top_level = true
 modulate = Color(0.17451319, 0.18259466, 0.17648783, 1)
 billboard = 1
+shaded = true
 no_depth_test = true
 sprite_frames = SubResource("SpriteFrames_tkkn2")
 autoplay = "default"

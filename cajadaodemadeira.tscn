@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://l8cs11pm2va6"]
+
+[ext_resource type="PackedScene" uid="uid://csigse20kt6mc" path="res://cajadaodemadeira.fbx" id="1_i15oc"]
+
+[node name="cajadaodemadeira" unique_id=1373596317 instance=ExtResource("1_i15oc")]
+
+[node name="Light" parent="." index="2" unique_id=1436017200]
+visible = false
