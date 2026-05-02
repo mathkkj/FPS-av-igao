@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dhc53kgwya7qn"]
+
+[ext_resource type="Script" uid="uid://ctn8e30adxj2l" path="res://alvo.gd" id="1_0b8xr"]
+[ext_resource type="Texture2D" uid="uid://dyolaqx7tm7g1" path="res://fabbrinextbotpixelado.png" id="2_g45jm"]
+[ext_resource type="AudioStream" uid="uid://dke7pahi7yv1b" path="res://AUDIO_FABBRI.mp3" id="3_g45jm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g45jm"]
+radius = 0.7167969
+height = 1.4455566
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g45jm"]
+
+[node name="inimigo" type="CharacterBody3D" unique_id=1873398117 groups=["inimigos"]]
+script = ExtResource("1_0b8xr")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1263127756]
+billboard = 1
+texture = ExtResource("2_g45jm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=590768799]
+transform = Transform3D(0.8264794, 0, 0, 0, 0.8264794, 0, 0, 0, 0.99999976, -0.024484182, -0.042053193, 0.021362303)
+shape = SubResource("CapsuleShape3D_g45jm")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=256676150]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=2127325879]
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0.05078124, 0.06500244, 0.021362305)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1661947483]
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, -0.024484182, -0.042053193, 0.021362303)
+shape = SubResource("CapsuleShape3D_g45jm")
+
+[node name="Timer" type="Timer" parent="." unique_id=1420156413]
+wait_time = 0.5
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=967042036]
+stream = ExtResource("3_g45jm")
+autoplay = true
+max_distance = 10.0
+parameters/looping = true
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1214019414]
+sprite_frames = SubResource("SpriteFrames_g45jm")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

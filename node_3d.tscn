@@ -2,18 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://crcv2csr7aco1" path="res://character_body_3d.tscn" id="1_a202f"]
 [ext_resource type="Script" uid="uid://2cbeno6p27n" path="res://main.gd" id="1_r3fl7"]
-[ext_resource type="Script" uid="uid://ctn8e30adxj2l" path="res://alvo.gd" id="2_a0tk4"]
-[ext_resource type="Texture2D" uid="uid://dyolaqx7tm7g1" path="res://fabbrinextbotpixelado.png" id="3_a0tk4"]
+[ext_resource type="PackedScene" uid="uid://dhc53kgwya7qn" path="res://inimigo.tscn" id="3_a0tk4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
 size = Vector3(1, 1, 1.5194702)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_r3fl7"]
-size = Vector3(1.3320313, 1.1300049, 0.2590332)
-
 [sub_resource type="NavigationMesh" id="NavigationMesh_r3fl7"]
 vertices = PackedVector3Array(-9.978349, 0.5, -11.303616, -9.978349, 0.5, 5.1963844, 10.021651, 0.5, 5.1963844, 10.021651, 0.5, -11.303616)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a0tk4"]
+size = Vector3(31.939575, 1, 32.145752)
 
 [node name="Node3D" type="Node3D" unique_id=223864082]
 script = ExtResource("1_r3fl7")
@@ -52,19 +51,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19226176, 0)
 
 [node name="Node3D" type="Node3D" parent="camera" unique_id=1706178535]
 
-[node name="inimigo" type="CharacterBody3D" parent="." unique_id=665240621 groups=["inimigos"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73378575, 0)
-script = ExtResource("2_a0tk4")
-
-[node name="Sprite3D" type="Sprite3D" parent="inimigo" unique_id=694343873]
-billboard = 1
-texture = ExtResource("3_a0tk4")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="inimigo" unique_id=2055451940]
-transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0.05078124, 0.06500244, 0.021362305)
-shape = SubResource("BoxShape3D_r3fl7")
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="inimigo" unique_id=396029474]
+[node name="inimigo" parent="." unique_id=1873398117 instance=ExtResource("3_a0tk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0282345, 0.73378575, 1.4531937)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1057712189]
 navigation_mesh = SubResource("NavigationMesh_r3fl7")
@@ -84,3 +72,19 @@ size = Vector3(1, 1, 1.5529785)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21673006, 0)
 
 [node name="Node3D" type="Node3D" parent="NavigationRegion3D/camera" unique_id=336842673]
+
+[node name="spawn" type="Timer" parent="." unique_id=1593556001]
+wait_time = 2.0
+autostart = true
+
+[node name="caiu no void" type="Area3D" parent="." unique_id=908988684]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.2278118, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="caiu no void" unique_id=837634449]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2529907, 0, -1.6968994)
+shape = SubResource("BoxShape3D_a0tk4")
+
+[connection signal="xp_maximo" from="personagem" to="." method="_on_personagem_xp_maximo"]
+[connection signal="MATOU_FABBRI" from="inimigo" to="personagem" method="_on_inimigo_matou_fabbri"]
+[connection signal="timeout" from="spawn" to="." method="_on_spawn_timeout"]
+[connection signal="body_entered" from="caiu no void" to="personagem" method="_on_caiu_no_void_body_entered"]

@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://bljednqmqve6y" path="res://character_body_3d.gd" id="1_iwpo4"]
 [ext_resource type="Texture2D" uid="uid://dcec5qbppfm8x" path="res://images (19).jpg" id="2_vd578"]
 [ext_resource type="Texture2D" uid="uid://d2qvu4ybfsbd1" path="res://mirapixeladapng.png" id="3_vd578"]
+[ext_resource type="Script" uid="uid://c7y72hc8spsaq" path="res://camera.gd" id="4_c7tqt"]
+[ext_resource type="AudioStream" uid="uid://dycvr0b0yqj5s" path="res://aiai_1.mp3" id="5_nl27k"]
 
 [sub_resource type="Animation" id="Animation_vd578"]
 length = 0.001
@@ -256,20 +258,33 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -48.0
-offset_right = 14.0
-offset_bottom = 16.0
+offset_left = -30.0
+offset_top = -32.0
+offset_right = 34.0
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.5, 1.5)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("3_vd578")
 
+[node name="BarVida" type="ProgressBar" parent="CanvasLayer" unique_id=83013986]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 116.409836
+grow_vertical = 0
+
+[node name="BarXp" type="ProgressBar" parent="CanvasLayer" unique_id=1775006291]
+visible = false
+offset_right = 1141.0
+offset_bottom = 41.0
+
 [node name="camera" type="Camera3D" parent="." unique_id=1174475061]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13701588, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24953026, 0)
 fov = 100.0
+script = ExtResource("4_c7tqt")
 
 [node name="Node3D" type="Node3D" parent="camera" unique_id=1643827802]
 
@@ -279,3 +294,6 @@ transform = Transform3D(0.007, 0, 0, 0, 0.007, 0, 0, 0, 0.007, 0.309347, -0.288,
 [node name="Cube" type="MeshInstance3D" parent="camera/cajadaodemadeira" unique_id=194117079]
 transform = Transform3D(100, 0, 0, 0, -1.1920929e-05, 99.999985, 0, -99.999985, -1.1920929e-05, 0, 0, 18.624165)
 mesh = SubResource("ArrayMesh_87l2e")
+
+[node name="tomei_dano" type="AudioStreamPlayer" parent="." unique_id=1688304700]
+stream = ExtResource("5_nl27k")

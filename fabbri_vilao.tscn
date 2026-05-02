@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://c56q3g81dd3ic"]
+
+[ext_resource type="Script" uid="uid://c3h131velb7wo" path="res://fabbri_vilao.gd" id="1_r0jd0"]
+[ext_resource type="Texture2D" uid="uid://dyolaqx7tm7g1" path="res://fabbrinextbotpixelado.png" id="2_gtur8"]
+[ext_resource type="AudioStream" uid="uid://dke7pahi7yv1b" path="res://AUDIO_FABBRI.mp3" id="3_kffgj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g45jm"]
+radius = 0.7167969
+height = 1.4455566
+
+[node name="Fabbri" type="CharacterBody3D" unique_id=733504788 groups=["inimigos"]]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_r0jd0")
+dano_ao_jogador = 50
+vida = 1000
+metadata/_custom_type_script = "uid://ctn8e30adxj2l"
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1048006690 groups=["inimigos"]]
+modulate = Color(0.36790502, 0, 0.07294049, 1)
+billboard = 1
+texture = ExtResource("2_gtur8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=881290086 groups=["inimigos"]]
+transform = Transform3D(0.8264794, 0, 0, 0, 0.8264794, 0, 0, 0, 0.99999976, -0.024484182, -0.042053193, 0.021362303)
+shape = SubResource("CapsuleShape3D_g45jm")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1516474465 groups=["inimigos"]]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=988606093 groups=["inimigos"]]
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0.05078124, 0.06500244, 0.021362305)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1800057205 groups=["inimigos"]]
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, -0.024484182, -0.042053193, 0.021362303)
+shape = SubResource("CapsuleShape3D_g45jm")
+
+[node name="Timer" type="Timer" parent="." unique_id=278935367 groups=["inimigos"]]
+wait_time = 0.5
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=967576422 groups=["inimigos"]]
+stream = ExtResource("3_kffgj")
+pitch_scale = 0.5
+autoplay = true
+max_distance = 10.0
+parameters/looping = true
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1370927863]
+offset_right = 1139.0
+offset_bottom = 50.0
+max_value = 1000.0
