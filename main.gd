@@ -35,16 +35,24 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	get_tree().call_group("inimigos", "update_target_location", player.global_transform.origin)
 	camera.fov = move_toward(camera.fov, fov_alvo, 500 * delta)
-	
+
+	# segurança: se o mouse já não está mais pressionado, para de atirar
+	if atirando and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		atirando = false
+		anim.play("aitrando")
+
 	if atirando:
-		tempo_ate_disparar -= delta
-		if tempo_ate_disparar <= 0.0:
-			atirar_projetil(get_viewport().get_mouse_position())
-			tempo_ate_disparar = cadencia
+		if pente <= 0:
+			atirando = false
+			anim.play("aitrando")
+		else:
+			tempo_ate_disparar -= delta
+			if tempo_ate_disparar <= 0.0:
+				atirar_projetil(get_viewport().get_mouse_position())
+				tempo_ate_disparar = cadencia
 	
-	tempo_ate_disparar_spray -= delta 
-	
-	barpente.value = pente
+	tempo_ate_disparar_spray -= delta
+	barpente.value = max(pente, 0)
 	
 func atirar_raio_da_camera_fps(mouse_pos: Vector2):
 	if camera == null:
@@ -90,7 +98,7 @@ func atirar_projetil_spray(mouse_pos: Vector2):
 		return
 	
 	if alvo.collider.has_method("dano"):
-		alvo.collider.dano(10)
+		alvo.collider.dano(50)
 		
 		print("colidiu em um alvo que recebe dano")
 	else:
@@ -108,21 +116,22 @@ func atirar_projetil_spray(mouse_pos: Vector2):
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and pente >= 1:
-		if event.pressed:
-			anim.play("aitrando_2") #loop
-			
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed and pente >= 1:
+			anim.play("aitrando_2")
 			atirar_projetil(event.position)
 			atirando = true
 			tempo_ate_disparar = 0
-		else:
-			anim.play("aitrando")
+		elif not event.pressed:
 			atirando = false
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and pente >= 3:
+			anim.play("aitrando")
+
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed and pente >= 3:
 		if tempo_ate_disparar_spray > 0:
 			return
+
 		tempo_ate_disparar_spray = cadencia_spray
-		
+
 		for i in range(3):
 			var spray = Vector2(
 				randf_range(-20, 17),
@@ -130,12 +139,10 @@ func _input(event: InputEvent) -> void:
 			)
 			anim.play("disparador diferente")
 			atirar_projetil(event.position + spray)
-			
-			
-		
+
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
 		alternar_zoom()
-		
+
 	if Input.is_action_just_pressed("recarregar"):
 		pente = 30
 		anim.play("recarregando")

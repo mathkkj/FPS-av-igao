@@ -44,9 +44,15 @@ max_distance = 10.0
 parameters/looping = true
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1370927863]
+visible = false
 offset_right = 1139.0
 offset_bottom = 50.0
 max_value = 1000.0
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1758248318]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.831213, 0)
+billboard = 1
+text = "Evil Fabbri"
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

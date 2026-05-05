@@ -418,7 +418,6 @@ offset_right = 116.409836
 grow_vertical = 0
 
 [node name="BarXp" type="ProgressBar" parent="CanvasLayer" unique_id=1775006291]
-visible = false
 offset_right = 1141.0
 offset_bottom = 41.0
 
@@ -429,6 +428,7 @@ offset_right = 1153.0
 offset_bottom = 645.0
 max_value = 30.0
 value = 30.0
+fill_mode = 1
 show_percentage = false
 
 [node name="camera" type="Camera3D" parent="." unique_id=1174475061]

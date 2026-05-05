@@ -4,7 +4,9 @@ class_name Fabbri
 signal MATOU_FABBRI
 
 @export var dano_ao_jogador = 20
-@export var vida = 200
+@export var vida : int
+
+@onready var textovida = $Label3D
 
 @onready var explosao_cena = preload("res://particula_explosao.tscn")
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
@@ -14,6 +16,7 @@ var alvo = null
 var morreu := false
 
 func _physics_process(delta):
+	textovida.text = str("Fabbri: ", vida)
 	if morreu:
 		return
 

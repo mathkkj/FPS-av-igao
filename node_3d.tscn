@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://crcv2csr7aco1" path="res://character_body_3d.tscn" id="1_a202f"]
 [ext_resource type="Script" uid="uid://2cbeno6p27n" path="res://main.gd" id="1_r3fl7"]
-[ext_resource type="PackedScene" uid="uid://dhc53kgwya7qn" path="res://inimigo.tscn" id="3_a0tk4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_noarx"]
 size = Vector3(1, 1, 1.5194702)
@@ -51,9 +50,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19226176, 0)
 
 [node name="Node3D" type="Node3D" parent="camera" unique_id=1706178535]
 
-[node name="inimigo" parent="." unique_id=1873398117 instance=ExtResource("3_a0tk4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0282345, 0.73378575, 1.4531937)
-
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1057712189]
 navigation_mesh = SubResource("NavigationMesh_r3fl7")
 
@@ -85,6 +81,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2529907, 0, -1.6968994)
 shape = SubResource("BoxShape3D_a0tk4")
 
 [connection signal="xp_maximo" from="personagem" to="." method="_on_personagem_xp_maximo"]
-[connection signal="MATOU_FABBRI" from="inimigo" to="personagem" method="_on_inimigo_matou_fabbri"]
 [connection signal="timeout" from="spawn" to="." method="_on_spawn_timeout"]
 [connection signal="body_entered" from="caiu no void" to="personagem" method="_on_caiu_no_void_body_entered"]
