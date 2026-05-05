@@ -5,18 +5,23 @@ var fov_normal = 75
 var fov_zoom = 40
 var fov_alvo = 75
 
+var pente = 30
+
+
 var atirando = false
-var cadencia = 0.50
+var cadencia = 0.4
 var tempo_ate_disparar = 0
+
+var tempo_ate_disparar_spray = 0
+var cadencia_spray = 0.6
 
 const impact = preload("res://impacto.tscn")
 const decal_spr = preload("res://bullethole_sprite.tscn")
 
 @onready var player = $personagem
 @onready var camera = $personagem/camera
-@onready var cajado = $personagem/camera/cajadaodemadeira
-@onready var anim = $personagem/AnimationPlayer
-
+@onready var anim = $personagem/camera/cajado/AnimationPlayer
+@onready var barpente = $personagem/CanvasLayer/BarPente
 @onready var cena_fabbri = preload("res://inimigo.tscn")
 @onready var cena_fabbri_mal = preload("res://fabbri_vilao.tscn")
 
@@ -24,6 +29,8 @@ const decal_spr = preload("res://bullethole_sprite.tscn")
 func _ready() -> void:
 	player.xp_maximo.connect(self._on_personagem_xp_maximo)
 	#talvez n funcione
+	
+
 	
 func _physics_process(delta: float) -> void:
 	get_tree().call_group("inimigos", "update_target_location", player.global_transform.origin)
@@ -35,8 +42,11 @@ func _physics_process(delta: float) -> void:
 			atirar_projetil(get_viewport().get_mouse_position())
 			tempo_ate_disparar = cadencia
 	
+	tempo_ate_disparar_spray -= delta 
+	
+	barpente.value = pente
+	
 func atirar_raio_da_camera_fps(mouse_pos: Vector2):
-	var camera = get_viewport().get_camera_3d()
 	if camera == null:
 		return null
 	
@@ -54,12 +64,13 @@ func atirar_raio_da_camera_fps(mouse_pos: Vector2):
 		return result
 
 func atirar_projetil(from):
+	pente -= 1
 	var alvo = atirar_raio_da_camera_fps(from)
 	if alvo == null:
 		return
 	
 	if alvo.collider.has_method("dano"):
-		alvo.collider.dano(10)
+		alvo.collider.dano(20)
 		print("colidiu em um alvo que recebe dano")
 	else:
 		var impct = impact.instantiate()
@@ -97,24 +108,37 @@ func atirar_projetil_spray(mouse_pos: Vector2):
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and pente >= 1:
 		if event.pressed:
+			anim.play("aitrando_2") #loop
+			
 			atirar_projetil(event.position)
 			atirando = true
 			tempo_ate_disparar = 0
 		else:
+			anim.play("aitrando")
 			atirando = false
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and pente >= 3:
+		if tempo_ate_disparar_spray > 0:
+			return
+		tempo_ate_disparar_spray = cadencia_spray
+		
 		for i in range(3):
 			var spray = Vector2(
-				randf_range(-10, 7),
-				randf_range(-10, 7)
+				randf_range(-20, 17),
+				randf_range(-20, 17)
 			)
+			anim.play("disparador diferente")
 			atirar_projetil(event.position + spray)
+			
 			
 		
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
 		alternar_zoom()
+		
+	if Input.is_action_just_pressed("recarregar"):
+		pente = 30
+		anim.play("recarregando")
 
 func alternar_zoom():
 	zoomado = !zoomado
@@ -123,11 +147,11 @@ func alternar_zoom():
 	if zoomado:
 		player.ACCEL = player.SPEED / 2
 		fov_alvo = fov_zoom
-		anim.play("zoom_in")
+		anim.play("zoom/zoom_in")
 	else:
 		player.ACCEL = player.SPEED * 2
 		fov_alvo = fov_normal
-		anim.play("zoom_out")
+		anim.play("zoom/zoom_out")
 
 
 func _on_spawn_timeout() -> void:
@@ -144,6 +168,7 @@ func _on_spawn_timeout() -> void:
 
 func _on_personagem_xp_maximo() -> void:
 	$spawn.stop()
+	$spawn.paused
 	print("xp maximo")
 	var fabbri = cena_fabbri_mal.instantiate()
 	#var pos_z = randf_range(2.861, -9.934)

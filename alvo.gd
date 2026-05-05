@@ -20,7 +20,7 @@ func _physics_process(delta):
 	var current_location = global_transform.origin
 	var next_location = nav_agent.get_next_path_position()
 	velocity = (next_location - current_location).normalized() * SPEED
-	move_and_slide()
+	
 
 	if vida <= 0:
 		morreu = true
@@ -33,6 +33,7 @@ func _physics_process(delta):
 		await explosao.get_node("smoke").finished
 		explosao.queue_free()
 		queue_free()
+	move_and_slide()
 
 func update_target_location(target_location):
 	nav_agent.target_position = target_location
@@ -49,7 +50,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		return
 	if body.has_method("perder_vida"):
 		alvo = body
-		alvo.perder_vida(10)
+		alvo.perder_vida(dano_ao_jogador)
 		$Timer.start()
 
 func _on_area_3d_body_exited(body: Node3D) -> void:

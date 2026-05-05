@@ -1,17 +1,4 @@
-[gd_scene format=4 uid="uid://crcv2csr7aco1"]
-
-[ext_resource type="Script" uid="uid://bljednqmqve6y" path="res://character_body_3d.gd" id="1_iwpo4"]
-[ext_resource type="Texture2D" uid="uid://dcec5qbppfm8x" path="res://images (19).jpg" id="2_vd578"]
-[ext_resource type="Texture2D" uid="uid://d2qvu4ybfsbd1" path="res://mirapixeladapng.png" id="3_vd578"]
-[ext_resource type="Script" uid="uid://c7y72hc8spsaq" path="res://camera.gd" id="4_c7tqt"]
-[ext_resource type="AudioStream" uid="uid://dycvr0b0yqj5s" path="res://aiai_1.mp3" id="5_nl27k"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_a202f"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7tqt"]
-albedo_texture = ExtResource("2_vd578")
-
-[sub_resource type="SphereMesh" id="SphereMesh_noarx"]
+[gd_scene format=4 uid="uid://bj61gl4rcjj7i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gjb04"]
 resource_name = "madeira"
@@ -180,23 +167,6 @@ tracks/0/keys = {
 "values": [Vector3(0.056552414, 0.06586641, 0.06784928), Vector3(0.08780338, 0.08195657, 0.0998014), Vector3(0.056552414, 0.06586641, 0.06784928)]
 }
 
-[sub_resource type="Animation" id="Animation_jvo56"]
-resource_name = "aitrando_2"
-length = 0.4
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("cristal:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(7.2099876, 0.18946458, 5.2780294),
-"update": 0,
-"values": [Vector3(0.056552414, 0.06586641, 0.06784928), Vector3(0.08780338, 0.08195657, 0.0998014), Vector3(0.056552414, 0.06586641, 0.06784928)]
-}
-
 [sub_resource type="Animation" id="Animation_iae6c"]
 resource_name = "disparador diferente"
 length = 0.6666667
@@ -293,46 +263,8 @@ tracks/1/keys = {
 _data = {
 &"RESET": SubResource("Animation_d7qj0"),
 &"aitrando": SubResource("Animation_hp34s"),
-&"aitrando_2": SubResource("Animation_jvo56"),
 &"disparador diferente": SubResource("Animation_iae6c"),
 &"recarregando": SubResource("Animation_3gp18")
-}
-
-[sub_resource type="Animation" id="Animation_nl27k"]
-resource_name = "zoom_in"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.19999999),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.5, -0.5, -0.5), Vector3(0.5, -0.5, -1)]
-}
-
-[sub_resource type="Animation" id="Animation_obynr"]
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.5, -0.5, -1), Vector3(0.5, -0.5, -0.5)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jvo56"]
-_data = {
-&"zoom_in": SubResource("Animation_nl27k"),
-&"zoom_out": SubResource("Animation_obynr")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0tpc"]
@@ -377,90 +309,24 @@ shadow_mesh = SubResource("ArrayMesh_xderm")
 
 [sub_resource type="Skin" id="Skin_4ukac"]
 
-[node name="personagem" type="CharacterBody3D" unique_id=1856283303]
+[node name="Node3D" type="Node3D" unique_id=1543030546]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, -0.35)
-script = ExtResource("1_iwpo4")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1843027720]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-shape = SubResource("SphereShape3D_a202f")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1612200444]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_c7tqt")
-mesh = SubResource("SphereMesh_noarx")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2137188182]
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=387124497]
-texture_filter = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -30.0
-offset_top = -32.0
-offset_right = 34.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("3_vd578")
-
-[node name="BarVida" type="ProgressBar" parent="CanvasLayer" unique_id=83013986]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -27.0
-offset_right = 116.409836
-grow_vertical = 0
-
-[node name="BarXp" type="ProgressBar" parent="CanvasLayer" unique_id=1775006291]
-visible = false
-offset_right = 1141.0
-offset_bottom = 41.0
-
-[node name="BarPente" type="ProgressBar" parent="CanvasLayer" unique_id=1122604006]
-offset_left = 983.0
-offset_top = 499.0
-offset_right = 1153.0
-offset_bottom = 645.0
-max_value = 30.0
-value = 30.0
-show_percentage = false
-
-[node name="camera" type="Camera3D" parent="." unique_id=1174475061]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24953026, 0)
-fov = 100.0
-script = ExtResource("4_c7tqt")
-
-[node name="Node3D" type="Node3D" parent="camera" unique_id=1643827802]
-
-[node name="cajado" type="Node3D" parent="camera" unique_id=1543030546]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.5, -0.5, -0.35)
-
-[node name="madeira" type="Node3D" parent="camera/cajado" unique_id=727120676]
+[node name="madeira" type="Node3D" parent="." unique_id=727120676]
 transform = Transform3D(0.06109967, 0, 0, 0, 0.045629557, 0, 0, 0, 0.052176356, 0.005027771, 0, -0.0068199635)
 
-[node name="Cube" type="MeshInstance3D" parent="camera/cajado/madeira" unique_id=869210654]
+[node name="Cube" type="MeshInstance3D" parent="madeira" unique_id=869210654]
 transform = Transform3D(100, 0, 0, 0, -2.3841858e-05, 99.99999, 0, -99.99999, -2.3841858e-05, 0, 0, 0)
 mesh = SubResource("ArrayMesh_a0uc2")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="camera/cajado" unique_id=579177138]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=579177138]
 libraries/ = SubResource("AnimationLibrary_yjufx")
-libraries/zoom = SubResource("AnimationLibrary_jvo56")
-autoplay = &"zoom/zoom_out"
 
-[node name="cristal" type="Node3D" parent="camera/cajado" unique_id=428353316]
+[node name="cristal" type="Node3D" parent="." unique_id=428353316]
 transform = Transform3D(0.056552414, 0, 0, 0, 0.06586641, 0, 0, 0, 0.06784928, 0.025331289, 3.0745444, -0.06534922)
 
-[node name="Cube" type="MeshInstance3D" parent="camera/cajado/cristal" unique_id=1741661862]
+[node name="Cube" type="MeshInstance3D" parent="cristal" unique_id=1741661862]
 transform = Transform3D(99.99964, 0.11602563, 0.24113688, -0.24120525, 0.058794077, 99.99969, 0.115883484, -99.99991, 0.059073787, -0.15563938, -64.38001, 0.7309121)
 material_overlay = SubResource("StandardMaterial3D_g1hq6")
 mesh = SubResource("ArrayMesh_gvkjn")
 skin = SubResource("Skin_4ukac")
-
-[node name="tomei_dano" type="AudioStreamPlayer" parent="." unique_id=1688304700]
-stream = ExtResource("5_nl27k")
